@@ -1,0 +1,6 @@
+feature: ['feature/*', 'feat/*']
+fix: fix/*
+chore :hammer:: chore/*
+対面診療: feature/real/*
+オンライン診療: feature/elemedicine/* 
+プラットフォーム: feature/platform/*

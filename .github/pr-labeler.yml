@@ -1,5 +1,5 @@
 feature: feature/*
 fix: fix/*
 対面診療: feature/real/*
-オンライン診療: feature/elemedicine/* 
+オンライン診療: feature/telemedicine/* 
 プラットフォーム: feature/platform/*

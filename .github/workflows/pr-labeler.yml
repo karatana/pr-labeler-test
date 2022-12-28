@@ -26,11 +26,12 @@ jobs:
               pull_number: context.payload.pull_request.number
             });
             console.log('---------------------------------------');
-            console.log('headbase: ', p.data.head.sha, '...', p.data.base.sha);
+            const basehead = p.data.base.sha + '...' + p.data.head.sha;
+            console.log('headbase: ', basehead);
             const commits = await github.rest.repos.compareCommits({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              basehead: p.data.base.sha + '...' + p.data.head.sha
+              basehead: basehead
             });
             console.log('---------------------------------------');
             console.log('commits: ', commits);

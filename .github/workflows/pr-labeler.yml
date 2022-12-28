@@ -24,6 +24,6 @@ jobs:
             const p = github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.pull_request.number
+              pull_number: context.payload.pull_request.number
             });
             console.log(p);

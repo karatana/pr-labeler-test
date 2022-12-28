@@ -36,7 +36,7 @@ jobs:
             console.log('---------------------------------------');
             console.log('commits length: ', commits_response.data.commits.length);
             const commits = commits_response.data.commits;
-            const pull_requests = [];
+            const pull_request_numbers = [];
             await commits.forEach(async (commit) => {
               const pull_response = await github.rest.repos.listPullRequestsAssociatedWithCommit({
                 owner: context.repo.owner,

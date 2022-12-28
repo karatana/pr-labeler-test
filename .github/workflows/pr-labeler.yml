@@ -49,5 +49,5 @@ jobs:
                 }
               })
               console.log('---------------------------------------');
-              console.log(pull_response.data)
+              console.log(pull_request_numbers)
             });

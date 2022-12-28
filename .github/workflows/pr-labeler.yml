@@ -25,4 +25,13 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number
             });
-            console.log('head, base: ', p.data.head, p.data.base);
+            console.log('---------------------------------------');
+            console.log('head, base: ', p.data.head.sha, p.data.base.sha);
+            const commits = await github.rest.repos.compareCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              base: p.data.base.sha,
+              head: p.data.head.sha
+            });
+            console.log('---------------------------------------');
+            console.log('first commits: ', commits[0]);

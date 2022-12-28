@@ -51,7 +51,7 @@ jobs:
             });
             console.log('---------------------------------------');
             console.log(pull_request_numbers)
-            pull_request_numbers.forEach(pull_request_number => {
+            await pull_request_numbers.forEach(async (pull_request_number) => {
               const pull_request_response = await github.rest.pulls.get({
                 owner: context.repo.owner,
                 repo: context.repo.repo,

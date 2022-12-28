@@ -28,7 +28,7 @@ jobs:
             console.log('---------------------------------------');
             const basehead = p.data.base.sha + '...' + p.data.head.sha;
             console.log('headbase: ', basehead);
-            const commits = await github.rest.repos.compareCommits({
+            const commits = await github.rest.repos.compareCommitsWithBasehead({
               owner: context.repo.owner,
               repo: context.repo.repo,
               basehead: basehead

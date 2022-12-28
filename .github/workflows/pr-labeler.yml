@@ -34,4 +34,4 @@ jobs:
               head: p.data.head.sha
             });
             console.log('---------------------------------------');
-            console.log('first commits: ', commits[0]);
+            console.log('first commits: ', commits);

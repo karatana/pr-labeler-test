@@ -17,3 +17,7 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/pr-labeler.yml # optional, .github/pr-labeler.yml is the default value
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(context)

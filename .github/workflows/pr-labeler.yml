@@ -34,4 +34,4 @@ jobs:
               basehead: basehead
             });
             console.log('---------------------------------------');
-            console.log('commits: ', commits);
+            console.log('commits: ', commits.data);

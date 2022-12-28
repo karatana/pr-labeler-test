@@ -1,7 +1,7 @@
 name: PR Labeler
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited, synchronize]
 
 permissions:
   contents: read
@@ -17,3 +17,47 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/pr-labeler.yml # optional, .github/pr-labeler.yml is the default value
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const p = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            console.log('---------------------------------------');
+            const basehead = p.data.base.sha + '...' + p.data.head.sha;
+            console.log('headbase: ', basehead);
+            const commits_response = await github.rest.repos.compareCommitsWithBasehead({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              basehead: basehead
+            });
+            console.log('---------------------------------------');
+            console.log('commits length: ', commits_response.data.commits.length);
+            const commits = commits_response.data.commits;
+            const pull_request_numbers = [];
+            await commits.forEach(async (commit) => {
+              const pull_response = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: commit.sha,
+              });
+              pull_response.data.forEach(pull_request => {
+                if (!pull_request_numbers.includes(pull_request.number) && pull_request.number != context.payload.pull_request.number) {
+                  pull_request_numbers.push(pull_request.number)
+                }
+              })
+            });
+            console.log('---------------------------------------');
+            console.log(pull_request_numbers)
+            await pull_request_numbers.forEach(async (pull_request_number) => {
+              const pull_request_response = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pull_request_number
+              });
+              console.log('---------------------------------------');
+              console.log(pull_request_response.data)
+            })
+

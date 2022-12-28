@@ -20,10 +20,10 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log(context);
+            console.log('context: ', context);
             const p = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number
             });
-            console.log(p);
+            console.log('head, base: ', p.data.head, p.data.base);

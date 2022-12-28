@@ -1,3 +1,4 @@
 対面診療: real/*
 オンライン診療: telemedicine/* 
 プラットフォーム: platform/*
+リリース: dev/beta

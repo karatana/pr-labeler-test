@@ -44,10 +44,20 @@ jobs:
                 commit_sha: commit.sha,
               });
               pull_response.data.forEach(pull_request => {
-                if (!pull_request_numbers.includes(pull_request.number)) {
+                if (!pull_request_numbers.includes(pull_request.number) && pull_request.number != context.payload.pull_request.number) {
                   pull_request_numbers.push(pull_request.number)
                 }
               })
-              console.log('---------------------------------------');
-              console.log(pull_request_numbers)
             });
+            console.log('---------------------------------------');
+            console.log(pull_request_numbers)
+            pull_request_numbers.forEach(pull_request_number => {
+              const pull_request_response = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pull_request_number
+              });
+              console.log('---------------------------------------');
+              console.log(pull_request_response.data)
+            })
+

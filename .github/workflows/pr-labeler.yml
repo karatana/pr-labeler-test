@@ -43,6 +43,11 @@ jobs:
                 repo: context.repo.repo,
                 commit_sha: commit.sha,
               });
+              pull_response.data.forEach(pull_request => {
+                if (!pull_request_numbers.includes(pull_request.number)) {
+                  pull_request_numbers.push(pull_request.number)
+                }
+              })
               console.log('---------------------------------------');
               console.log(pull_response.data)
             });

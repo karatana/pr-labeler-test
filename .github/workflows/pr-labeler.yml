@@ -37,7 +37,7 @@ jobs:
             console.log('commits: ', commits_response.data.commits);
             const commits = commits_response.data.commits;
             const pull_requests = [];
-            await commits.each(commit => async {
+            await commits.each(async (commit) => {
               const pull_response = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
                 owner: context.repo.owner,
                 repo: context.repo.repo,

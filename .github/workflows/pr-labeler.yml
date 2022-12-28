@@ -34,7 +34,7 @@ jobs:
               basehead: basehead
             });
             console.log('---------------------------------------');
-            console.log('commits: ', commits_response.data.commits);
+            console.log('commits length: ', commits_response.data.commits.length);
             const commits = commits_response.data.commits;
             const pull_requests = [];
             await commits.forEach(async (commit) => {
@@ -43,5 +43,6 @@ jobs:
                 repo: context.repo.repo,
                 commit_sha: commit.sha,
               });
-              console.log(pull_response.data)
+              console.log('---------------------------------------');
+              console.log(pull_response.data.length)
             });

@@ -1,7 +1,7 @@
 name: PR Labeler
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited]
 
 permissions:
   contents: read
@@ -20,4 +20,10 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log(context)
+            console.log(context);
+            const p = github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.pull_request.number
+            });
+            console.log(p);

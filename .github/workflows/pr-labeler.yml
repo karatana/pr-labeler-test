@@ -26,7 +26,7 @@ jobs:
               pull_number: context.payload.pull_request.number
             });
             console.log('---------------------------------------');
-            console.log('head, base: ', p.data.head.sha, ', ', p.data.base.sha);
+            console.log('headbase: ', p.data.head.sha, '...', p.data.base.sha);
             const commits = await github.rest.repos.compareCommits({
               owner: context.repo.owner,
               repo: context.repo.repo,
